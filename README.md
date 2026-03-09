@@ -80,14 +80,10 @@ python app.py
 
 This project was built for a Database Systems course and demonstrates a full database-driven web application with CRUD operations and advanced SQL queries.
 
-```
 
 ---
 
-# 7️⃣ Folder Structure (do this early)
-
-Create this:
-
+## Folder Structure
 ```
 
 otaku-tracker/
