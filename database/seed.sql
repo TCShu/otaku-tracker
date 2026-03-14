@@ -1,0 +1,220 @@
+-- INSERT INTO Genres (genre_name) VALUES
+-- ('Action'),
+-- ('Adventure'),
+-- ('Romance'),
+-- ('Comedy'),
+-- ('Drama'),
+-- ('Fantasy'),
+-- ('Mystery'),
+-- ('Horror'),
+-- ('Sci-Fi'),
+-- ('Slice of Life'),
+-- ('Supernatural'),
+-- ('Psychological');
+-- 
+-- INSERT INTO Series 
+-- (title, type, year, status, total_episodes, avg_episode_duration, average_score)
+-- VALUES
+-- ('Attack on Titan', 'anime', 2013, 'Finished', 87, 24, 9.1),
+-- ('Fullmetal Alchemist: Brotherhood', 'anime', 2009, 'Finished', 64, 24, 9.2),
+-- ('Death Note', 'anime', 2006, 'Finished', 37, 24, 8.9),
+-- ('Demon Slayer', 'anime', 2019, 'Ongoing', 55, 24, 8.7),
+-- ('One Piece', 'anime', 1999, 'Ongoing', 1100, 24, 8.8);
+-- 
+-- INSERT INTO SeriesGenres (series_id, genre_id) VALUES
+-- (1,1),
+-- (1,2),
+-- (2,1),
+-- (2,6),
+-- (3,7),
+-- (4,1),
+-- (4,6),
+-- (5,2),
+-- (5,6);
+-- 
+-- INSERT INTO MoodGenreMapping (mood_name, genre_id, relevance_score) VALUES
+-- ('Hype',1,0.9),
+-- ('Hype',2,0.8),
+-- ('Cozy',10,0.9),
+-- ('Cozy',4,0.7),
+-- ('Romance',3,1.0),
+-- ('Dark',8,0.9),
+-- ('Mystery',7,1.0);
+
+-- INSERT INTO Series
+-- (title, type, year, status, total_episodes, avg_episode_duration, average_score)
+-- VALUES
+-- ('Naruto', 'anime', 2002, 'Finished', 220, 23, 7.9),
+-- ('Naruto Shippuden', 'anime', 2007, 'Finished', 500, 23, 8.3),
+-- ('Fullmetal Alchemist: Brotherhood', 'anime', 2009, 'Finished', 64, 24, 9.2),
+-- ('Death Note', 'anime', 2006, 'Finished', 37, 23, 8.9),
+-- ('Jujutsu Kaisen', 'anime', 2020, 'Ongoing', 47, 24, 8.6),
+-- ('My Hero Academia', 'anime', 2016, 'Ongoing', 150, 24, 8.4),
+-- ('Tokyo Ghoul', 'anime', 2014, 'Finished', 48, 24, 7.7),
+-- ('Sword Art Online', 'anime', 2012, 'Ongoing', 96, 24, 7.5),
+-- ('Hunter x Hunter', 'anime', 2011, 'Finished', 148, 24, 9.0),
+-- ('Steins;Gate', 'anime', 2011, 'Finished', 24, 24, 9.0),
+-- ('Code Geass', 'anime', 2006, 'Finished', 50, 24, 8.7),
+-- ('Vinland Saga', 'anime', 2019, 'Ongoing', 48, 24, 8.8),
+-- ('Chainsaw Man', 'anime', 2022, 'Ongoing', 12, 24, 8.6),
+-- ('Black Clover', 'anime', 2017, 'Ongoing', 170, 24, 8.2),
+-- ('Fairy Tail', 'anime', 2009, 'Finished', 328, 24, 7.9),
+-- ('Bleach', 'anime', 2004, 'Ongoing', 392, 24, 8.3),
+-- ('Dragon Ball Z', 'anime', 1989, 'Finished', 291, 24, 8.5);
+
+-- INSERT INTO Series
+-- (title, type, year, status, total_episodes, avg_episode_duration, average_score)
+-- VALUES
+-- ('Solo Leveling', 'manhwa', 2018, 'Finished', NULL, NULL, 8.9),
+-- ('Tower of God', 'manhwa', 2010, 'Ongoing', NULL, NULL, 8.7),
+-- ('Omniscient Reader''s Viewpoint', 'manhwa', 2020, 'Ongoing', NULL, NULL, 9.0),
+-- ('The Beginning After The End', 'manhwa', 2018, 'Ongoing', NULL, NULL, 8.8),
+-- ('Berserk', 'manga', 1989, 'Ongoing', NULL, NULL, 9.4),
+-- ('One Punch Man', 'manga', 2012, 'Ongoing', NULL, NULL, 8.7),
+-- ('Tokyo Revengers', 'manga', 2017, 'Finished', NULL, NULL, 8.1),
+-- ('Chainsaw Man', 'manga', 2018, 'Ongoing', NULL, NULL, 8.8),
+-- ('Re:Zero', 'light_novel', 2014, 'Ongoing', NULL, NULL, 8.6),
+-- ('No Game No Life', 'light_novel', 2012, 'Ongoing', NULL, NULL, 8.5);
+
+-- -- Manhwa
+-- UPDATE Series
+-- SET total_chapters = 179
+-- WHERE series_id = 23; -- Solo Leveling
+
+-- UPDATE Series
+-- SET total_chapters = 620
+-- WHERE series_id = 24; -- Tower of God
+-- 
+-- UPDATE Series
+-- SET total_chapters = 220
+-- WHERE series_id = 25; -- Omniscient Reader's Viewpoint
+-- 
+-- UPDATE Series
+-- SET total_chapters = 190
+-- WHERE series_id = 26; -- The Beginning After The End
+-- 
+-- 
+-- -- Manga
+-- UPDATE Series
+-- SET total_chapters = 376
+-- WHERE series_id = 27; -- Berserk
+-- 
+-- UPDATE Series
+-- SET total_chapters = 230
+-- WHERE series_id = 28; -- One Punch Man
+-- 
+-- UPDATE Series
+-- SET total_chapters = 278
+-- WHERE series_id = 29; -- Tokyo Revengers
+-- 
+-- UPDATE Series
+-- SET total_chapters = 170
+-- WHERE series_id = 30; -- Chainsaw Man
+-- 
+-- 
+-- -- Light Novels
+-- UPDATE Series
+-- SET total_chapters = 390
+-- WHERE series_id = 31; -- Re:Zero
+-- 
+-- UPDATE Series
+-- SET total_chapters = 60
+-- WHERE series_id = 32; -- No Game No Life
+
+-- INSERT INTO SeriesGenres (series_id, genre_id) VALUES
+-- 
+-- -- Attack on Titan
+-- (1,1),(1,2),(1,5),(1,8),(1,7),(1,11),(1,12),
+-- 
+-- -- Fullmetal Alchemist Brotherhood
+-- (2,1),(2,2),(2,6),(2,5),(2,4),
+-- 
+-- -- Death Note
+-- (3,7),(3,12),(3,11),(3,5),
+-- 
+-- -- Demon Slayer
+-- (4,1),(4,6),(4,11),
+-- 
+-- -- One Piece
+-- (5,1),(5,2),(5,4),(5,6),
+-- 
+-- -- Naruto
+-- (6,1),(6,2),(6,6),
+-- 
+-- -- Naruto Shippuden
+-- (7,1),(7,2),(7,6),(7,5),
+-- 
+-- -- Duplicate Fullmetal Alchemist Brotherhood
+-- (8,1),(8,2),(8,6),(8,5),(8,4),
+-- 
+-- -- Duplicate Death Note
+-- (9,7),(9,12),(9,11),(9,5),
+-- 
+-- -- Jujutsu Kaisen
+-- (10,1),(10,11),(10,6),(10,4),
+-- 
+-- -- My Hero Academia
+-- (11,1),(11,2),(11,4),(11,6),
+-- 
+-- -- Tokyo Ghoul
+-- (12,8),(12,11),(12,5),(12,12),
+-- 
+-- -- Sword Art Online
+-- (13,1),(13,6),(13,9),(13,3),
+-- 
+-- -- Hunter x Hunter
+-- (14,1),(14,2),(14,6),(14,4),
+-- 
+-- -- Steins Gate
+-- (15,9),(15,12),(15,5),
+-- 
+-- -- Code Geass
+-- (16,1),(16,9),(16,5),
+-- 
+-- -- Vinland Saga
+-- (17,1),(17,2),(17,5),
+-- 
+-- -- Chainsaw Man (anime)
+-- (18,1),(18,8),(18,11),(18,4),
+-- 
+-- -- Black Clover
+-- (19,1),(19,6),(19,2),(19,4),
+-- 
+-- -- Fairy Tail
+-- (20,1),(20,6),(20,2),(20,4),
+-- 
+-- -- Bleach
+-- (21,1),(21,11),(21,2),
+-- 
+-- -- Dragon Ball Z
+-- (22,1),(22,2),(22,4),(22,6),
+-- 
+-- -- Solo Leveling
+-- (23,1),(23,6),(23,11),(23,2),
+-- 
+-- -- Tower of God
+-- (24,1),(24,6),(24,2),(24,7),
+-- 
+-- -- Omniscient Reader
+-- (25,1),(25,6),(25,5),(25,7),
+-- 
+-- -- Beginning After the End
+-- (26,1),(26,6),(26,2),(26,3),
+-- 
+-- -- Berserk
+-- (27,1),(27,6),(27,8),(27,5),
+-- 
+-- -- One Punch Man
+-- (28,1),(28,4),
+-- 
+-- -- Tokyo Revengers
+-- (29,1),(29,5),
+-- 
+-- -- Chainsaw Man (manga)
+-- (30,1),(30,8),(30,11),
+-- 
+-- -- Re:Zero
+-- (31,6),(31,11),(31,5),(31,3),
+-- 
+-- -- No Game No Life
+-- (32,6),(32,9),(32,4);
