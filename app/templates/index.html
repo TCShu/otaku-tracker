@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OtakuTracker</title>
+</head>
+<body>
+    <h1>OtakuTracker Recommendations 🎌</h1>
+
+    <!-- Mood Dropdown -->
+    <label>Mood:</label>
+    <select id="mood">
+        <option value="Hype">Hype</option>
+        <option value="Romance">Romance</option>
+        <option value="Dark">Dark</option>
+        <option value="Adventure">Adventure</option>
+    </select>
+
+    <!-- Type Dropdown -->
+    <label>Type:</label>
+    <select id="type">
+        <option value="">All</option>
+        <option value="anime">Anime</option>
+        <option value="manga">Manga</option>
+        <option value="manhwa">Manhwa</option>
+        <option value="light_novel">Light Novel</option>
+    </select>
+
+    <!-- Sort Dropdown -->
+    <label>Sort:</label>
+    <select id="sort">
+        <option value="score">Best Match</option>
+        <option value="alphabetical">A-Z</option>
+    </select>
+
+    <br><br>
+
+    <button onclick="getRecommendations()">Get Recommendations</button>
+
+    <h2>Results:</h2>
+    <ul id="results"></ul>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

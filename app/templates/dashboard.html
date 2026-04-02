@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OtakuTracker</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">✨ OtakuTracker</div>
+    <div class="nav-links">
+        <span>Dashboard</span>
+        <span>Library</span>
+        <span>Recommendations</span>
+    </div>
+    <button class="add-btn">+ Add Series</button>
+</div>
+
+<!-- HERO SECTION -->
+<div class="hero">
+    <h1>Welcome back, Otaku! ✨</h1>
+    <p>Ready to continue your anime journey? Let's find something perfect for you today.</p>
+    <button onclick="getRecommendations()">Get Smart Recommendations</button>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+    <div class="card">
+        <h3>Watching</h3>
+        <p id="watching">0</p>
+    </div>
+    <div class="card">
+        <h3>Completed</h3>
+        <p id="completed">0</p>
+    </div>
+    <div class="card">
+        <h3>Planned</h3>
+        <p id="planned">0</p>
+    </div>
+    <div class="card">
+        <h3>Total</h3>
+        <p id="total">0</p>
+    </div>
+</div>
+
+<!-- RESULTS -->
+<div id="results"></div>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
