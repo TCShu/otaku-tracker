@@ -2,50 +2,397 @@
 <html>
 <head>
     <title>OtakuTracker</title>
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
 <!-- NAVBAR -->
 <div class="navbar">
-    <div class="logo">✨ OtakuTracker</div>
+    <div class="logo">
+        <div class="logo-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+        </div>
+        <div>
+            <div class="logo-title">OtakuTracker</div>
+            <div class="logo-sub">Smart Anime Planner</div>
+        </div>
+    </div>
     <div class="nav-links">
-        <span>Dashboard</span>
-        <span>Library</span>
-        <span>Recommendations</span>
+        <span class="nav-item active" id="nav-dashboard" onclick="showView('dashboard')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Dashboard
+        </span>
+        <span class="nav-item" id="nav-library" onclick="showView('library')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            Library
+        </span>
+        <span class="nav-item" id="nav-recommendations" onclick="showView('recommendations')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Recommendations
+        </span>
     </div>
-    <button class="add-btn">+ Add Series</button>
+    <button class="add-btn" onclick="showView('add-series')">+ Add Series</button>
 </div>
 
-<!-- HERO SECTION -->
-<div class="hero">
-    <h1>Welcome back, Otaku! ✨</h1>
-    <p>Ready to continue your anime journey? Let's find something perfect for you today.</p>
-    <button onclick="getRecommendations()">Get Smart Recommendations</button>
+<!-- ═══════════════ VIEW: DASHBOARD ═══════════════ -->
+<div id="view-dashboard">
+    <div class="hero">
+        <h1>Welcome back, Otaku! ✨</h1>
+        <p>Ready to continue your anime journey? Let's find something perfect for you today.</p>
+        <div class="rec-controls">
+            <select id="mood">
+                <option value="Hype">Hype</option>
+                <option value="Romance">Romance</option>
+                <option value="Dark">Dark</option>
+                <option value="Adventure">Adventure</option>
+            </select>
+            <select id="type">
+                <option value="">All Types</option>
+                <option value="anime">Anime</option>
+                <option value="manga">Manga</option>
+                <option value="manhwa">Manhwa</option>
+                <option value="light_novel">Light Novel</option>
+            </select>
+            <select id="sort">
+                <option value="score">Best Match</option>
+                <option value="alphabetical">A-Z</option>
+            </select>
+            <button onclick="getRecommendations()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                Get Smart Recommendations
+            </button>
+        </div>
+    </div>
+
+    <div class="stats">
+        <div class="card">
+            <div class="card-icon watching-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="card-info">
+                <span class="card-label">Watching</span>
+                <p id="watching">0</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon completed-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="card-info">
+                <span class="card-label">Completed</span>
+                <p id="completed">0</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon planned-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="card-info">
+                <span class="card-label">Planned</span>
+                <p id="planned">0</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon total-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <div class="card-info">
+                <span class="card-label">Total Series</span>
+                <p id="total">0</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTINUE WATCHING / READING -->
+    <div class="continue-section">
+        <div class="continue-col">
+            <div class="continue-header">
+                <h2>Continue Watching</h2>
+                <span class="view-all-link" onclick="showView('library')">View all →</span>
+            </div>
+            <div id="continue-watching"></div>
+        </div>
+        <div class="continue-col">
+            <div class="continue-header">
+                <h2>Continue Reading</h2>
+                <span class="view-all-link" onclick="showView('library')">View all →</span>
+            </div>
+            <div id="continue-reading"></div>
+        </div>
+    </div>
+
+    <div id="results"></div>
 </div>
 
-<!-- STATS -->
-<div class="stats">
-    <div class="card">
-        <h3>Watching</h3>
-        <p id="watching">0</p>
+<!-- ═══════════════ VIEW: LIBRARY ═══════════════ -->
+<div id="view-library" class="view-hidden">
+    <div class="page-header">
+        <h1>Your Library</h1>
+        <p>Track and manage all your anime and manga</p>
     </div>
-    <div class="card">
-        <h3>Completed</h3>
-        <p id="completed">0</p>
+
+    <div class="library-filter-bar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-muted);flex-shrink:0"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        <button class="tab-btn active" onclick="filterLibrary('All', this)">All (<span id="tab-all">0</span>)</button>
+        <button class="tab-btn" onclick="filterLibrary('Watching', this)">Watching (<span id="tab-watching">0</span>)</button>
+        <button class="tab-btn" onclick="filterLibrary('Completed', this)">Completed (<span id="tab-completed">0</span>)</button>
+        <button class="tab-btn" onclick="filterLibrary('Planned', this)">Planned (<span id="tab-planned">0</span>)</button>
+        <button class="tab-btn" onclick="filterLibrary('Dropped', this)">Dropped (<span id="tab-dropped">0</span>)</button>
+        <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+            <span style="font-size:13px;color:var(--text-muted)">Sort:</span>
+            <select id="library-sort" onchange="reloadLibrary()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:8px;font-size:13px;cursor:pointer">
+                <option value="recent">Recently Added</option>
+                <option value="title">Title A–Z</option>
+                <option value="rating">Rating</option>
+                <option value="status">Status</option>
+            </select>
+        </div>
     </div>
-    <div class="card">
-        <h3>Planned</h3>
-        <p id="planned">0</p>
-    </div>
-    <div class="card">
-        <h3>Total</h3>
-        <p id="total">0</p>
-    </div>
+
+    <div id="library-content"></div>
 </div>
 
-<!-- RESULTS -->
-<div id="results"></div>
+<!-- ═══════════════ VIEW: ADD SERIES ═══════════════ -->
+<div id="view-add-series" class="view-hidden">
+    <div class="page-header">
+        <h1>Add to Library</h1>
+        <p>Browse and add anime, manga, manhwa, or light novels</p>
+    </div>
+
+    <div class="browse-controls">
+        <div class="browse-search">
+            <label class="browse-label">Search Series</label>
+            <div class="search-input-wrap">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="browse-search" placeholder="Search by title..."
+                    onkeydown="if(event.key==='Enter') runSearch()"
+                    oninput="onSearchInput()">
+                <button class="search-go-btn" onclick="runSearch()">Search</button>
+            </div>
+        </div>
+        <div class="browse-filters">
+            <div>
+                <label class="browse-label">Add as</label>
+                <select id="add-status">
+                    <option value="Watching">Watching</option>
+                    <option value="Planned">Planned</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Dropped">Dropped</option>
+                </select>
+            </div>
+            <div>
+                <label class="browse-label">Type</label>
+                <select id="browse-type" onchange="loadBrowse()">
+                    <option value="">All Types</option>
+                    <option value="anime">Anime</option>
+                    <option value="manga">Manga</option>
+                    <option value="manhwa">Manhwa</option>
+                    <option value="light_novel">Light Novel</option>
+                </select>
+            </div>
+            <div>
+                <label class="browse-label">Status</label>
+                <select id="browse-status" onchange="loadBrowse()">
+                    <option value="">All</option>
+                    <option value="Ongoing">Ongoing</option>
+                    <option value="Finished">Finished</option>
+                </select>
+            </div>
+            <div>
+                <label class="browse-label">Sort by</label>
+                <select id="browse-sort" onchange="loadBrowse()">
+                    <option value="score">Score</option>
+                    <option value="alphabetical">A-Z</option>
+                    <option value="year">Newest</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div id="browse-grid" class="series-grid"></div>
+    <div id="browse-footer"></div>
+</div>
+
+<!-- ═══════════════ VIEW: RECOMMENDATIONS ═══════════════ -->
+<div id="view-recommendations" class="view-hidden">
+    <div class="page-header">
+        <h1>Smart Recommendations ✨</h1>
+        <p>Get personalized suggestions based on your mood, time, and commitment level</p>
+    </div>
+
+    <div class="rec-form">
+
+        <!-- MOOD -->
+        <div class="rec-form-section">
+            <p class="rec-form-label">How are you feeling?</p>
+            <div class="mood-grid">
+                <button class="mood-card" data-mood="Hype" onclick="selectMood(this)">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <span>Hype</span>
+                </button>
+                <button class="mood-card" data-mood="Cozy" onclick="selectMood(this)">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
+                    <span>Cozy</span>
+                </button>
+                <button class="mood-card" data-mood="Emotional" onclick="selectMood(this)">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 15s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                    <span>Emotional</span>
+                </button>
+                <button class="mood-card" data-mood="Romance" onclick="selectMood(this)">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    <span>Romance</span>
+                </button>
+                <button class="mood-card" data-mood="Dark" onclick="selectMood(this)">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    <span>Dark</span>
+                </button>
+                <button class="mood-card" data-mood="Adventure" onclick="selectMood(this)">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                    <span>Adventure</span>
+                </button>
+                <button class="mood-card" data-mood="Mystery" onclick="selectMood(this)">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <span>Mystery</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- TIME SLIDER -->
+        <div class="rec-form-section">
+            <p class="rec-form-label">How much time do you have?</p>
+            <div class="time-slider-wrap">
+                <input type="range" id="time-slider" min="15" max="180" value="30" step="15" oninput="updateTimeLabel()">
+                <div class="time-row">
+                    <span class="time-side">Quick</span>
+                    <span class="time-val" id="time-label">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        30 min
+                    </span>
+                    <span class="time-side" style="text-align:right">Extended</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMMITMENT -->
+        <div class="rec-form-section">
+            <p class="rec-form-label">Commitment level</p>
+            <div class="commitment-grid">
+                <button class="commitment-card" data-commitment="Short" onclick="selectCommitment(this)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <strong>Short</strong>
+                    <span>Movies, one-shots</span>
+                </button>
+                <button class="commitment-card active" data-commitment="Medium" onclick="selectCommitment(this)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    <strong>Medium</strong>
+                    <span>12–50 episodes</span>
+                </button>
+                <button class="commitment-card" data-commitment="Long" onclick="selectCommitment(this)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <strong>Long</strong>
+                    <span>Epic journeys</span>
+                </button>
+            </div>
+        </div>
+
+        <button class="btn-get-rec" onclick="loadRecommendationsPage()">Get Recommendations</button>
+    </div>
+
+    <div id="rec-results"></div>
+</div>
+
+<!-- ═══════════════ VIEW: SERIES DETAIL ═══════════════ -->
+<div id="view-detail" class="view-hidden">
+    <div style="padding:24px 32px 0">
+        <button class="back-btn" id="detail-back-btn" onclick="goBack()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            Back
+        </button>
+    </div>
+
+    <div class="detail-card">
+        <!-- Header -->
+        <div class="detail-hero">
+            <div id="detail-cover-wrap"></div>
+            <div class="detail-meta">
+                <h1 id="detail-title"></h1>
+                <div id="detail-badges" class="detail-badges"></div>
+                <p id="detail-desc" class="detail-desc"></p>
+                <div id="detail-stats" class="detail-stats"></div>
+            </div>
+        </div>
+
+        <!-- Progress Tracker -->
+        <div class="detail-section" id="detail-progress-section">
+            <h3>Progress Tracker</h3>
+            <div class="progress-track">
+                <div class="progress-top">
+                    <span id="progress-label">0 / — episodes</span>
+                    <span id="progress-pct" class="progress-pct">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progress-fill"></div>
+                </div>
+                <div class="progress-controls">
+                    <button class="prog-btn" onclick="changeProgress(-1)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <div class="progress-center">
+                        <span id="progress-num" class="progress-num">0</span>
+                        <span id="progress-unit" class="progress-unit">episodes completed</span>
+                    </div>
+                    <button class="prog-btn prog-btn-plus" onclick="changeProgress(1)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                </div>
+                <div class="progress-quick">
+                    <button onclick="changeProgress(5)">+5</button>
+                    <button onclick="changeProgress(10)">+10</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status -->
+        <div class="detail-section">
+            <h3>Status</h3>
+            <div class="status-selector">
+                <button id="dstatus-Watching"  onclick="setDetailStatus('Watching')">Watching</button>
+                <button id="dstatus-Completed" onclick="setDetailStatus('Completed')">Completed</button>
+                <button id="dstatus-Planned"   onclick="setDetailStatus('Planned')">Planned</button>
+                <button id="dstatus-Dropped"   onclick="setDetailStatus('Dropped')">Dropped</button>
+            </div>
+        </div>
+
+        <!-- Rating -->
+        <div class="detail-section">
+            <h3>Your Rating</h3>
+            <div class="rating-selector" id="rating-selector">
+                <button onclick="setDetailRating(1)">1</button>
+                <button onclick="setDetailRating(2)">2</button>
+                <button onclick="setDetailRating(3)">3</button>
+                <button onclick="setDetailRating(4)">4</button>
+                <button onclick="setDetailRating(5)">5</button>
+                <button onclick="setDetailRating(6)">6</button>
+                <button onclick="setDetailRating(7)">7</button>
+                <button onclick="setDetailRating(8)">8</button>
+                <button onclick="setDetailRating(9)">9</button>
+                <button onclick="setDetailRating(10)">10</button>
+            </div>
+            <p id="rating-label" class="rating-label"></p>
+        </div>
+
+        <!-- Actions -->
+        <div class="detail-actions">
+            <button class="btn-primary" id="detail-save-btn" onclick="saveDetail()">Add to Library</button>
+            <button class="btn-remove-lib" id="detail-remove-btn" style="display:none" onclick="removeDetail()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                Remove from Library
+            </button>
+        </div>
+    </div>
+</div>
 
 <script src="/static/script.js"></script>
 </body>

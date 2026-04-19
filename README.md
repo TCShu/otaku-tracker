@@ -64,6 +64,11 @@ Clone the repository:
 git clone https://github.com/yourusername/otaku-tracker.git
 ````
 
+Start virtual enviornment:
+```
+py -m venv venv
+```
+
 Install dependencies:
 
 ```
@@ -73,7 +78,7 @@ pip install -r requirements.txt
 Run Flask app:
 
 ```
-python app.py
+python app/app.py
 ```
 
 ## Project Purpose

@@ -66,4 +66,5 @@
 --     FOREIGN KEY (genre_id) REFERENCES Genres(genre_id)
 -- );
 
-
+-- Run this migration if Series table already exists without external_id:
+-- ALTER TABLE Series ADD COLUMN external_id VARCHAR(100) UNIQUE DEFAULT NULL;
